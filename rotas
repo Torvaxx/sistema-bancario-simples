@@ -1,0 +1,23 @@
+
+const express = require('express');
+
+const { saqueEmConta, transferir, consultarSaldo, consultarHistorico, } = require('./controladores/contas');
+
+const { cadastrarConta, listarContas, atualizarUsuario, excluirUmaConta, depositoEmConta, } = require('./controladores/contas');
+const { transferencias } = require('./bancodedados');
+
+
+const rotas = express();
+
+
+rotas.get('/contas', listarContas)
+rotas.post('/contas', cadastrarConta)
+rotas.put('/contas/:numeroConta/usuario', atualizarUsuario)
+rotas.delete('/contas/:numeroConta', excluirUmaConta)
+rotas.post('/transacoes/depositar', depositoEmConta)
+rotas.post('/transacoes/sacar', saqueEmConta)
+rotas.post('/transacoes/transferir', transferir)
+rotas.get('/contas/saldo', consultarSaldo)
+rotas.get('/contas/extrato', consultarHistorico)
+
+module.exports = rotas; 
